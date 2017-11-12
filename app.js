@@ -34,6 +34,16 @@ db.once('open', function callback () {
     console.log("Mongo DB ON");
 });
 
+var user = mongoose.Schema({
+    name : String,
+    id : String,
+    password : String,
+    token : String,
+});
+
+var userModel = mongoose.model('userModel',user);
+
+require('./routes/auth')(app , randomString , userModel);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
